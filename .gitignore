@@ -1,0 +1,18 @@
+# AWS Sensitive Resource Configuration
+aws-resources.env
+
+# SSH Keys
+*.pem
+*.key
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*~
+
+# OS files
+.DS_Store
+Thumbs.db

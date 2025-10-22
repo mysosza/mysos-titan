@@ -1,0 +1,3 @@
+REDIS_HOST=mysos-titan-redis.mythzx.0001.afs1.cache.amazonaws.com
+REDIS_PASSWORD=null
+REDIS_PORT=6379

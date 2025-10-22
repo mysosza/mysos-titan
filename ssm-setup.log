@@ -1,0 +1,32 @@
+╔══════════════════════════════════════════════════════════════╗
+║          AWS Systems Manager Session Manager Setup          ║
+║                                                              ║
+║  Secure shell access without SSH! Close port 22 forever!    ║
+╚══════════════════════════════════════════════════════════════╝
+
+📋 What this does:
+  - Installs SSM agent on EC2 instances
+  - Configures IAM for SSM access
+  - Enables secure shell via AWS Console/CLI
+  - Allows us to CLOSE SSH port 22!
+  - All sessions logged to CloudWatch
+
+💰 Cost: FREE!
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Step 1: Updating IAM Role for SSM
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⏳ Attaching SSM managed policy to EC2 role...
+✅ SSM policy attached to role
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Step 2: Installing/Updating SSM Agent on Instances
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⏳ Installing SSM agent on Laravel instance...
+  Installing on Laravel instance (i-09a737dfe9348a28b)...
+Received disconnect from 13.245.247.128 port 22:2: Too many authentication failures
+Disconnected from 13.245.247.128 port 22
+scp: Connection closed

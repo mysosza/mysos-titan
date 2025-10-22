@@ -1,0 +1,11 @@
+🚀 Creating EC2 Instance for Node.js TCP Servers...
+
+aws: [ERROR]: argument --key-name: expected one argument
+
+usage: aws [options] <command> <subcommand> [<subcommand> ...] [parameters]
+To see help text, you can run:
+
+  aws help
+  aws <command> help
+  aws <command> <subcommand> help
+

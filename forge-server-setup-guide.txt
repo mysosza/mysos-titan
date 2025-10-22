@@ -1,0 +1,275 @@
+==============================================
+LARAVEL FORGE SERVER SETUP GUIDE
+==============================================
+
+Server Connection Details:
+--------------------------
+Server Type: Custom VPS
+IP Address: 13.245.247.128
+SSH Port: 22
+Root Password: (not used - using SSH key)
+
+SSH Key Location:
+--------------------------
+File: mysos-titan-key.pem
+To view the private key for Forge:
+  cat mysos-titan-key.pem
+
+Server Specifications:
+--------------------------
+Instance Type: t3.large
+vCPUs: 2
+RAM: 8 GB
+Region: af-south-1 (Africa - Cape Town)
+OS: Ubuntu 24.04 LTS
+
+Database Configuration (RDS):
+--------------------------
+Host: mysos-titan-db.c7coqesk2kne.af-south-1.rds.amazonaws.com
+Port: 3306
+Database: mysos_production
+Username: mysos_admin
+Password: y91W267JVYGGwRsfRNStCGca
+
+Redis Configuration (ElastiCache):
+--------------------------
+Host: mysos-titan-redis.mythzx.0001.afs1.cache.amazonaws.com
+Port: 6379
+Password: (none)
+
+Load Balancer:
+--------------------------
+ALB DNS: mysos-titan-alb-358805960.af-south-1.elb.amazonaws.com
+Target Groups Created:
+  - cortex.mysos.co.za -> arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-cortex/78e8b51d024a0894
+  - apex.mysos.co.za -> arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-apex/78c1f12c385440f9
+  - console.mysos.co.za -> arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-console/e7252ef32f7757d8
+  - app.mysos.co.za -> arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-app/36d8c46ca45f95d9
+  - web.mysos.co.za -> arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-web/8f182d5f099a96ca
+  - sockets.mysos.co.za -> arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-sockets/97d35d01e7e18915
+
+==============================================
+STEP-BY-STEP FORGE SETUP
+==============================================
+
+Step 1: Add Server to Forge
+--------------------------
+1. Go to: https://forge.laravel.com/servers/create
+2. Select "Custom VPS"
+3. Enter Server Details:
+   - Name: MySOS Titan Laravel
+   - IP Address: 13.245.247.128
+   - SSH Port: 22
+   - PHP Version: PHP 8.4
+   - Database: Don't install (we're using RDS)
+   
+4. Paste SSH Private Key:
+   Run this command and copy the output:
+   cat mysos-titan-key.pem
+
+5. Click "Add Server"
+6. Wait for Forge to provision (5-10 minutes)
+
+Step 2: Configure Server Settings
+--------------------------
+After server is provisioned:
+
+1. Navigate to Server > Meta
+2. Update these settings:
+   - Timezone: Africa/Johannesburg
+   - Scheduler: Enabled
+   
+3. Navigate to Server > Network
+   - Note: Port 80/443 traffic comes via ALB, not directly
+
+Step 3: Create Sites (Do this for each domain)
+--------------------------
+For each Laravel application, create a site:
+
+SITE 1: cortex.mysos.co.za
+  - Root Directory: /public
+  - PHP Version: PHP 8.4
+  - Project Type: General PHP/Laravel
+  - Web Directory: /public
+
+SITE 2: apex.mysos.co.za
+  - (same settings as above)
+
+SITE 3: console.mysos.co.za
+  - (same settings as above)
+
+SITE 4: app.mysos.co.za
+  - (same settings as above)
+
+SITE 5: web.mysos.co.za
+  - (same settings as above)
+
+SITE 6: sockets.mysos.co.za
+  - (same settings as above)
+  - Enable WebSockets
+
+Step 4: Install Git Repositories
+--------------------------
+For each site:
+1. Navigate to Site > Git Repository
+2. Select Provider: GitHub / GitLab / Bitbucket
+3. Enter Repository: your-org/repository-name
+4. Branch: main (or master)
+5. Click "Install Repository"
+
+Step 5: Configure Environment Variables
+--------------------------
+For EACH site, navigate to Site > Environment:
+
+Copy and paste these variables (update APP_NAME for each):
+
+APP_NAME="Cortex MySOS"
+APP_ENV=production
+APP_KEY=base64:YOUR_APP_KEY_HERE
+APP_DEBUG=false
+APP_URL=https://cortex.mysos.co.za
+
+LOG_CHANNEL=stack
+LOG_LEVEL=info
+
+DB_CONNECTION=mysql
+DB_HOST=mysos-titan-db.c7coqesk2kne.af-south-1.rds.amazonaws.com
+DB_PORT=3306
+DB_DATABASE=mysos_production
+DB_USERNAME=mysos_admin
+DB_PASSWORD=y91W267JVYGGwRsfRNStCGca
+
+BROADCAST_DRIVER=redis
+CACHE_DRIVER=redis
+QUEUE_CONNECTION=redis
+SESSION_DRIVER=redis
+
+REDIS_HOST=mysos-titan-redis.mythzx.0001.afs1.cache.amazonaws.com
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_MAILER=smtp
+MAIL_HOST=mailhog
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="noreply@mysos.co.za"
+MAIL_FROM_NAME="${APP_NAME}"
+
+Step 6: Enable Quick Deploy
+--------------------------
+For each site:
+1. Navigate to Site > Apps
+2. Enable "Quick Deploy"
+3. This will auto-deploy when you push to the branch
+
+Step 7: Configure Queue Workers
+--------------------------
+For each site that needs queue processing:
+1. Navigate to Site > Queue
+2. Click "New Worker"
+3. Settings:
+   - Connection: redis
+   - Queue: default
+   - Processes: 1
+   - Max Processes Per Queue: 3
+   - Timeout: 60
+   - Sleep: 3
+   - Max Tries: 3
+   - Memory: 512
+
+Step 8: Configure Scheduler
+--------------------------
+Laravel's scheduler is automatically configured by Forge.
+Ensure your app has schedule defined in app/Console/Kernel.php
+
+Step 9: SSL Certificates (After DNS is configured)
+--------------------------
+Once DNS points to ALB:
+1. Navigate to Site > SSL
+2. Select "LetsEncrypt"
+3. Click "Obtain Certificate"
+4. Forge will automatically renew
+
+Note: Since traffic comes through ALB, you may want to use 
+AWS Certificate Manager instead for SSL termination at ALB level.
+
+Step 10: Deploy Your Applications
+--------------------------
+For each site:
+1. Navigate to Site > Apps
+2. Click "Deploy Now"
+3. Or push to Git - auto-deploys if Quick Deploy enabled
+
+==============================================
+FORGE IAM PERMISSIONS (Optional - For Forge Integration)
+==============================================
+
+If you want Forge to manage AWS resources directly:
+
+1. Create IAM User for Forge:
+   aws iam create-user --user-name forge-automation
+
+2. Attach policies (files already created):
+   - forge-permissions-policy.json
+   - forge-user-policy.json
+   - forge-trust-policy.json
+
+3. Create access keys:
+   aws iam create-access-key --user-name forge-automation
+
+4. Add to Forge > Servers > Integration
+
+==============================================
+POST-SETUP VERIFICATION
+==============================================
+
+1. SSH Test:
+   ssh -i mysos-titan-key.pem forge@13.245.247.128
+
+2. Check PHP Version:
+   ssh forge@13.245.247.128 'php -v'
+
+3. Check Services:
+   ssh forge@13.245.247.128 'sudo systemctl status nginx'
+   ssh forge@13.245.247.128 'sudo systemctl status php8.4-fpm'
+
+4. Test Database Connection:
+   ssh forge@13.245.247.128 'mysql -h mysos-titan-db.c7coqesk2kne.af-south-1.rds.amazonaws.com -u mysos_admin -py91W267JVYGGwRsfRNStCGca -e "SELECT 1;"'
+
+5. Test Redis Connection:
+   ssh forge@13.245.247.128 'redis-cli -h mysos-titan-redis.mythzx.0001.afs1.cache.amazonaws.com ping'
+
+6. Check ALB Target Health:
+   aws elbv2 describe-target-health --region af-south-1 --target-group-arn arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-cortex/78e8b51d024a0894
+
+==============================================
+IMPORTANT NOTES
+==============================================
+
+1. Database: Using RDS, NOT Forge-managed MySQL
+   - Forge will NOT install MySQL on the server
+   - All Laravel apps connect to RDS endpoint
+
+2. Redis: Using ElastiCache, NOT local Redis
+   - Configure all apps to use: mysos-titan-redis.mythzx.0001.afs1.cache.amazonaws.com
+
+3. Load Balancer: Traffic comes through ALB
+   - Health checks configured for each target group
+   - SSL termination at ALB (recommended) or at Nginx
+
+4. File Storage: Consider using S3 for shared storage
+   - Run script: ./13-setup-s3-laravel-storage.sh
+   - Update Laravel filesystem config to use S3
+
+5. Backups: 
+   - RDS automated backups: 7 days retention
+   - Configure Forge backups for code/config
+   - RDS snapshots before major changes
+
+==============================================
+
+For detailed Laravel Forge documentation:
+https://forge.laravel.com/docs
+

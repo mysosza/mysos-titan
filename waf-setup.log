@@ -1,0 +1,30 @@
+╔══════════════════════════════════════════════════════════════╗
+║        AWS WAF Setup for Application Load Balancer          ║
+║                                                              ║
+║  Protects against: SQL injection, XSS, bad bots, DDoS       ║
+╚══════════════════════════════════════════════════════════════╝
+
+📋 What this creates:
+  - WAF Web ACL
+  - AWS Managed Rule Groups (free protection)
+  - Rate limiting (1000 req/5min per IP)
+  - IP reputation lists
+  - Bot control (basic)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Step 1: Creating WAF Web ACL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⏳ Creating WAF Web ACL with managed rule groups...
+✅ WAF Web ACL Created
+   ARN: arn:aws:wafv2:af-south-1:877582899699:regional/webacl/mysos-titan-waf/b77f286c-b0bc-4644-9268-ef0484dbd624
+   ID: b77f286c-b0bc-4644-9268-ef0484dbd624
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Step 2: Associating WAF with ALB
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⏳ Associating WAF Web ACL with Application Load Balancer...
+
+An error occurred (WAFUnavailableEntityException) when calling the AssociateWebACL operation: AWS WAF couldn’t retrieve the resource that you requested. Retry your request.

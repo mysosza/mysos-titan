@@ -1,0 +1,158 @@
+╔═══════════════════════════════════════════════════════════════╗
+║          LARAVEL FORGE - QUICK START GUIDE                    ║
+║          MySOS Titan AWS Deployment                           ║
+╔═══════════════════════════════════════════════════════════════╝
+
+📋 STEP 1: ADD SERVER TO FORGE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+URL: https://forge.laravel.com/servers/create
+
+Server Type: Custom VPS
+Name: MySOS Titan Laravel
+IP Address: 13.245.247.128
+SSH Port: 22
+PHP Version: PHP 8.4
+Database: None (uncheck - using RDS)
+
+SSH Private Key: (paste from mysos-titan-key.pem)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 STEP 2: CREATE 6 SITES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+For each domain below, click "New Site":
+
+1. cortex.mysos.co.za
+2. apex.mysos.co.za  
+3. console.mysos.co.za
+4. app.mysos.co.za
+5. web.mysos.co.za
+6. sockets.mysos.co.za (enable WebSockets)
+
+Settings for all:
+- PHP Version: PHP 8.4
+- Root Directory: /public
+- Web Directory: /public
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 STEP 3: CONFIGURE ENVIRONMENT (for each site)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Navigate to: Site > Environment
+
+Paste this (update APP_NAME and APP_URL for each site):
+
+APP_NAME="Your Site Name"
+APP_ENV=production
+APP_KEY=base64:YOUR_KEY_HERE
+APP_DEBUG=false
+APP_URL=https://your-domain.mysos.co.za
+
+DB_CONNECTION=mysql
+DB_HOST=mysos-titan-db.c7coqesk2kne.af-south-1.rds.amazonaws.com
+DB_PORT=3306
+DB_DATABASE=mysos_production
+DB_USERNAME=mysos_admin
+DB_PASSWORD=y91W267JVYGGwRsfRNStCGca
+
+REDIS_HOST=mysos-titan-redis.mythzx.0001.afs1.cache.amazonaws.com
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+BROADCAST_DRIVER=redis
+CACHE_DRIVER=redis
+QUEUE_CONNECTION=redis
+SESSION_DRIVER=redis
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 STEP 4: CONNECT GIT REPOSITORY (for each site)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Navigate to: Site > Git Repository
+
+1. Select Provider: GitHub/GitLab/Bitbucket
+2. Repository: your-org/your-repo
+3. Branch: main (or master)
+4. Click "Install Repository"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 STEP 5: ENABLE QUICK DEPLOY (for each site)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Navigate to: Site > Apps
+
+Toggle "Quick Deploy" ON
+
+This auto-deploys when you push to Git.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 STEP 6: SETUP QUEUE WORKERS (for sites that need it)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Navigate to: Site > Queue
+
+Click "New Worker":
+- Connection: redis
+- Queue: default
+- Processes: 1
+- Max Processes Per Queue: 3
+- Timeout: 60
+- Max Tries: 3
+- Memory: 512
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 STEP 7: FIRST DEPLOYMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+For each site:
+Navigate to: Site > Apps
+Click "Deploy Now"
+
+Watch the deployment log for success!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ VERIFICATION CHECKLIST
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+□ Server shows "Active" status in Forge
+□ All 6 sites created
+□ Environment variables configured for each site
+□ Git repositories connected
+□ Quick Deploy enabled
+□ Queue workers configured (if needed)
+□ Initial deployment successful
+□ Test SSH: ssh -i mysos-titan-key.pem forge@13.245.247.128
+□ Test database connection from Laravel
+□ Test Redis connection from Laravel
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔗 IMPORTANT LINKS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Forge Dashboard: https://forge.laravel.com
+Forge Docs: https://forge.laravel.com/docs
+CloudWatch Dashboard: https://console.aws.amazon.com/cloudwatch
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️  REMEMBER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ Database is RDS (external) - not on the server
+✓ Redis is ElastiCache (external) - not on the server
+✓ Traffic comes through ALB load balancer
+✓ SSH key: mysos-titan-key.pem (keep it safe!)
+✓ Confirm email subscription for CloudWatch alerts
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+For detailed guide: See forge-server-setup-guide.txt

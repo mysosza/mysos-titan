@@ -1,0 +1,14 @@
+🚀 Creating EC2 Instances for Laravel Apps...
+✅ SSH Key Created: mysos-titan-key.pem
+⚠️  IMPORTANT: Save this key file securely!
+✅ Using Ubuntu AMI: ami-08037f7166e3544b4
+
+aws: [ERROR]: argument --role-name: expected one argument
+
+usage: aws [options] <command> <subcommand> [<subcommand> ...] [parameters]
+To see help text, you can run:
+
+  aws help
+  aws <command> help
+  aws <command> <subcommand> help
+

@@ -1,0 +1,45 @@
+🚀 Creating VPC and networking infrastructure...
+✅ VPC Created: vpc-0efa5c3ac9425b8d0
+✅ Internet Gateway Created: igw-036dc0517e71faf9a
+✅ Public Subnets Created: subnet-05541be238bb54a80, subnet-0f4509228cf6730d3
+✅ Private Subnets Created: subnet-04b2f1d49e623cc70, subnet-01652bb41c289e8ff
+{
+    "Return": true
+}
+{
+    "AssociationId": "rtbassoc-07c0457bbfddf1a64",
+    "AssociationState": {
+        "State": "associated"
+    }
+}
+{
+    "AssociationId": "rtbassoc-0b88ac74e25283b50",
+    "AssociationState": {
+        "State": "associated"
+    }
+}
+✅ Route tables configured
+✅ NAT Gateway Created: nat-0545e14f6463f3e9c (waiting for it to become available...)
+{
+    "Return": true
+}
+{
+    "AssociationId": "rtbassoc-0e495d77b25214fc6",
+    "AssociationState": {
+        "State": "associated"
+    }
+}
+{
+    "AssociationId": "rtbassoc-01f728b8b518f8630",
+    "AssociationState": {
+        "State": "associated"
+    }
+}
+✅ Private route tables configured
+
+🎉 VPC Setup Complete!
+Resource IDs saved to aws-resources.env
+
+VPC ID: vpc-0efa5c3ac9425b8d0
+Public Subnets: subnet-05541be238bb54a80, subnet-0f4509228cf6730d3
+Private Subnets: subnet-04b2f1d49e623cc70, subnet-01652bb41c289e8ff

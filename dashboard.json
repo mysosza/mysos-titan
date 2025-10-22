@@ -1,0 +1,62 @@
+{
+  "widgets": [
+    {
+      "type": "metric",
+      "properties": {
+        "metrics": [
+          ["AWS/EC2", "CPUUtilization", {"stat": "Average", "label": "Laravel Server CPU"}],
+          ["...", {"stat": "Average", "label": "Node.js Server CPU"}]
+        ],
+        "period": 300,
+        "stat": "Average",
+        "region": "af-south-1",
+        "title": "EC2 CPU Usage",
+        "yAxis": {"left": {"min": 0, "max": 100}}
+      }
+    },
+    {
+      "type": "metric",
+      "properties": {
+        "metrics": [
+          ["AWS/RDS", "CPUUtilization", {"stat": "Average"}],
+          [".", "DatabaseConnections", {"stat": "Average"}],
+          [".", "FreeStorageSpace", {"stat": "Average"}]
+        ],
+        "period": 300,
+        "stat": "Average",
+        "region": "af-south-1",
+        "title": "RDS Metrics"
+      }
+    },
+    {
+      "type": "metric",
+      "properties": {
+        "metrics": [
+          ["AWS/ApplicationELB", "TargetResponseTime", {"stat": "Average"}],
+          [".", "RequestCount", {"stat": "Sum"}],
+          [".", "HTTPCode_Target_5XX_Count", {"stat": "Sum"}],
+          [".", "HTTPCode_Target_4XX_Count", {"stat": "Sum"}]
+        ],
+        "period": 300,
+        "stat": "Average",
+        "region": "af-south-1",
+        "title": "Load Balancer Metrics"
+      }
+    },
+    {
+      "type": "metric",
+      "properties": {
+        "metrics": [
+          ["AWS/ElastiCache", "CPUUtilization", {"stat": "Average"}],
+          [".", "NetworkBytesIn", {"stat": "Sum"}],
+          [".", "NetworkBytesOut", {"stat": "Sum"}],
+          [".", "CurrConnections", {"stat": "Average"}]
+        ],
+        "period": 300,
+        "stat": "Average",
+        "region": "af-south-1",
+        "title": "Redis Metrics"
+      }
+    }
+  ]
+}

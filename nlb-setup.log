@@ -1,0 +1,184 @@
+╔══════════════════════════════════════════════════════════════╗
+║   Network Load Balancer for Panic Button TCP Servers        ║
+║                                                              ║
+║  This is CRITICAL for panic button reliability!             ║
+║  Creates high-availability TCP load balancing               ║
+╚══════════════════════════════════════════════════════════════╝
+
+📋 What this creates:
+  - Network Load Balancer (Layer 4)
+  - Target Groups for ports 4000-4009
+  - Health checks for each TCP port
+  - Static IP addresses for panic buttons
+  - Automatic failover capability
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Step 1: Creating Network Load Balancer
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Elastic IPs allocated:
+   EIP 1: eipalloc-044fd849918217b36
+   EIP 2: eipalloc-0d03c3402fa11145a
+   Public IPs: 16.28.37.255, 13.246.81.110
+✅ Network Load Balancer Created
+   ARN: arn:aws:elasticloadbalancing:af-south-1:877582899699:loadbalancer/net/mysos-titan-nlb-tcp/5fc7b76fa947682e
+   DNS: mysos-titan-nlb-tcp-5fc7b76fa947682e.elb.af-south-1.amazonaws.com
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Step 2: Creating Target Groups for TCP Ports
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Target Group Created: Port 4000 (arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-tcp-4000/802ce4534dbe73b7)
+   ✅ Registered instance i-04b97d4d49468a701:4000
+✅ Target Group Created: Port 4001 (arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-tcp-4001/699dd3b297dfb2d7)
+   ✅ Registered instance i-04b97d4d49468a701:4001
+✅ Target Group Created: Port 4002 (arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-tcp-4002/20f68e5278655bd9)
+   ✅ Registered instance i-04b97d4d49468a701:4002
+✅ Target Group Created: Port 4003 (arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-tcp-4003/f616c858577c3bf1)
+   ✅ Registered instance i-04b97d4d49468a701:4003
+✅ Target Group Created: Port 4004 (arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-tcp-4004/c0d6a19bb967050b)
+   ✅ Registered instance i-04b97d4d49468a701:4004
+✅ Target Group Created: Port 4005 (arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-tcp-4005/6ef90a0c6c57a9e8)
+   ✅ Registered instance i-04b97d4d49468a701:4005
+✅ Target Group Created: Port 4006 (arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-tcp-4006/8476e86dd079b6b2)
+   ✅ Registered instance i-04b97d4d49468a701:4006
+✅ Target Group Created: Port 4007 (arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-tcp-4007/0a31beef1b390a30)
+   ✅ Registered instance i-04b97d4d49468a701:4007
+✅ Target Group Created: Port 4008 (arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-tcp-4008/428305db621c8176)
+   ✅ Registered instance i-04b97d4d49468a701:4008
+✅ Target Group Created: Port 4009 (arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-tcp-4009/f9b2bd49c46573f8)
+   ✅ Registered instance i-04b97d4d49468a701:4009
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Step 3: Creating Listeners for Each Port
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Listener Created: Port 4000 → Target Group
+✅ Listener Created: Port 4001 → Target Group
+✅ Listener Created: Port 4002 → Target Group
+✅ Listener Created: Port 4003 → Target Group
+✅ Listener Created: Port 4004 → Target Group
+✅ Listener Created: Port 4005 → Target Group
+✅ Listener Created: Port 4006 → Target Group
+✅ Listener Created: Port 4007 → Target Group
+✅ Listener Created: Port 4008 → Target Group
+✅ Listener Created: Port 4009 → Target Group
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Step 4: Updating Security Group
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⏳ Updating Node.js security group to allow NLB traffic...
+{
+    "Return": true,
+    "SecurityGroupRules": [
+        {
+            "SecurityGroupRuleId": "sgr-018eea85a19ddb4dd",
+            "GroupId": "sg-0115fa6aaf818f87d",
+            "GroupOwnerId": "877582899699",
+            "IsEgress": false,
+            "IpProtocol": "tcp",
+            "FromPort": 4000,
+            "ToPort": 4009,
+            "CidrIpv4": "10.0.0.0/16",
+            "SecurityGroupRuleArn": "arn:aws:ec2:af-south-1:877582899699:security-group-rule/sgr-018eea85a19ddb4dd"
+        }
+    ]
+}
+✅ Security group updated
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Step 5: Waiting for Target Health Checks
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⏳ Waiting for targets to become healthy (this takes 1-2 minutes)...
+
+Checking target health:
+  ⚠️  Port 4000: initial (may need more time or check PM2 on server)
+  ⚠️  Port 4001: initial (may need more time or check PM2 on server)
+  ⚠️  Port 4002: initial (may need more time or check PM2 on server)
+  ⚠️  Port 4003: initial (may need more time or check PM2 on server)
+  ⚠️  Port 4004: initial (may need more time or check PM2 on server)
+  ⚠️  Port 4005: initial (may need more time or check PM2 on server)
+  ⚠️  Port 4006: initial (may need more time or check PM2 on server)
+  ⚠️  Port 4007: initial (may need more time or check PM2 on server)
+  ⚠️  Port 4008: initial (may need more time or check PM2 on server)
+  ⚠️  Port 4009: initial (may need more time or check PM2 on server)
+
+╔══════════════════════════════════════════════════════════════╗
+║           🎉 Network Load Balancer Setup Complete! 🎉        ║
+╚══════════════════════════════════════════════════════════════╝
+
+📋 Network Load Balancer Details
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DNS Name: mysos-titan-nlb-tcp-5fc7b76fa947682e.elb.af-south-1.amazonaws.com
+Static IPs:
+  - 16.28.37.255 (AZ 1)
+  - 13.246.81.110 (AZ 2)
+
+Listening on ports: 4000-4009
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📝 IMPORTANT: Update Panic Button Configuration
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Update all panic buttons to connect to NLB instead of EC2:
+
+OLD: panic-button-1 connects to 13.245.88.195:4000
+NEW: panic-button-1 connects to 16.28.37.255:4000
+
+Or use DNS (recommended):
+NEW: panic-button-1 connects to mysos-titan-nlb-tcp-5fc7b76fa947682e.elb.af-south-1.amazonaws.com:4000
+
+Port mapping:
+  panic-button-1 → 16.28.37.255:4000 or mysos-titan-nlb-tcp-5fc7b76fa947682e.elb.af-south-1.amazonaws.com:4000
+  panic-button-2 → 16.28.37.255:4001 or mysos-titan-nlb-tcp-5fc7b76fa947682e.elb.af-south-1.amazonaws.com:4001
+  panic-button-3 → 16.28.37.255:4002 or mysos-titan-nlb-tcp-5fc7b76fa947682e.elb.af-south-1.amazonaws.com:4002
+  panic-button-4 → 16.28.37.255:4003 or mysos-titan-nlb-tcp-5fc7b76fa947682e.elb.af-south-1.amazonaws.com:4003
+  panic-button-5 → 16.28.37.255:4004 or mysos-titan-nlb-tcp-5fc7b76fa947682e.elb.af-south-1.amazonaws.com:4004
+  panic-button-6 → 16.28.37.255:4005 or mysos-titan-nlb-tcp-5fc7b76fa947682e.elb.af-south-1.amazonaws.com:4005
+  panic-button-7 → 16.28.37.255:4006 or mysos-titan-nlb-tcp-5fc7b76fa947682e.elb.af-south-1.amazonaws.com:4006
+  panic-button-8 → 16.28.37.255:4007 or mysos-titan-nlb-tcp-5fc7b76fa947682e.elb.af-south-1.amazonaws.com:4007
+  panic-button-9 → 16.28.37.255:4008 or mysos-titan-nlb-tcp-5fc7b76fa947682e.elb.af-south-1.amazonaws.com:4008
+  panic-button-10 → 16.28.37.255:4009 or mysos-titan-nlb-tcp-5fc7b76fa947682e.elb.af-south-1.amazonaws.com:4009
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔍 Testing Connection
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Test TCP connection to NLB:
+  nc -zv mysos-titan-nlb-tcp-5fc7b76fa947682e.elb.af-south-1.amazonaws.com 4000
+
+Or from panic button, test connection:
+  telnet 16.28.37.255 4000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 Benefits Achieved
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ High availability - automatic failover
+✅ Health checks - unhealthy targets removed
+✅ Static IP addresses - easier panic button config
+✅ Can now scale Node.js horizontally
+✅ Zero-downtime deployments possible
+✅ Better security - can restrict EC2 SSH
+
+💰 Cost: ~6/month
+
+🎯 Next Steps:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Test each port: for i in {4000..4009}; do nc -zv mysos-titan-nlb-tcp-5fc7b76fa947682e.elb.af-south-1.amazonaws.com $i; done
+2. Update panic button firmware/config to use new IPs
+3. Monitor CloudWatch for connection metrics
+4. Consider adding second Node.js instance for true HA
+5. Update documentation with new connection endpoints
+
+📈 To add more Node.js instances:
+  1. Launch new EC2 with same setup
+  2. Register with target groups:
+     aws elbv2 register-targets --target-group-arn <TG_ARN> --targets Id=<NEW_INSTANCE_ID>
+  3. NLB automatically distributes traffic
+

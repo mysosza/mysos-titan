@@ -1,6 +1,11 @@
 # AWS Sensitive Resource Configuration
 aws-resources.env
 
+# Sensitive trace files
+panic.link.trace.md
+aura.integration.trace.md
+*.trace.md
+
 # SSH Keys
 *.pem
 *.key

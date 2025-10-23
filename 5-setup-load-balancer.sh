@@ -33,7 +33,7 @@ APPS=(
   ["cortex"]="cortex.mysos.co.za"
   ["apex"]="apex.mysos.co.za"
   ["console"]="console.mysos.co.za"
-  ["app"]="app.mysos.co.za"
+  ["mobile"]="mobile.mysos.co.za"
   ["web"]="web.mysos.co.za"
   ["sockets"]="sockets.mysos.co.za"
 )

@@ -77,7 +77,7 @@ The following applications need to be updated:
 1. **cerebrum.mysos.co.za** - Main backend API
 2. **neo.mysos.co.za** - API services
 3. **portal.mysos.co.za** - Admin console
-4. **app.mysos.co.za** - Mobile app backend
+4. **mobile.mysos.co.za** - Mobile app backend
 5. **web.mysos.co.za** - Web application
 6. **sockets.mysos.co.za** - WebSocket server
 
@@ -219,7 +219,7 @@ Recommended migration order (lowest to highest risk):
 1. **Development/Testing** (if available)
 2. **sockets.mysos.co.za** - Lowest traffic
 3. **web.mysos.co.za** - Medium traffic
-4. **app.mysos.co.za** - User-facing but non-critical
+4. **mobile.mysos.co.za** - User-facing but non-critical
 5. **portal.mysos.co.za** - Admin only
 6. **neo.mysos.co.za** - API services
 7. **cerebrum.mysos.co.za** - Main backend (migrate last, highest traffic)

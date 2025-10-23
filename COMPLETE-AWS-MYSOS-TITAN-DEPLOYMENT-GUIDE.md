@@ -189,7 +189,7 @@ Update your DNS records (on Xneelo or Route 53) to point Laravel apps to AWS:
 cerebrum.mysos.co.za   -> CNAME -> mysos-titan-alb-358805960.af-south-1.elb.amazonaws.com
 neo.mysos.co.za        -> CNAME -> mysos-titan-alb-358805960.af-south-1.elb.amazonaws.com
 portal.mysos.co.za     -> CNAME -> mysos-titan-alb-358805960.af-south-1.elb.amazonaws.com
-app.mysos.co.za        -> CNAME -> mysos-titan-alb-358805960.af-south-1.elb.amazonaws.com
+mobile.mysos.co.za     -> CNAME -> mysos-titan-alb-358805960.af-south-1.elb.amazonaws.com
 web.mysos.co.za        -> CNAME -> mysos-titan-alb-358805960.af-south-1.elb.amazonaws.com
 sockets.mysos.co.za    -> CNAME -> mysos-titan-alb-358805960.af-south-1.elb.amazonaws.com
 
@@ -265,7 +265,7 @@ SSH Key: (upload your mysos-titan-key.pem content)
 # cerebrum.mysos.co.za
 # neo.mysos.co.za
 # portal.mysos.co.za
-# app.mysos.co.za
+# mobile.mysos.co.za
 # web.mysos.co.za
 # sockets.mysos.co.za (with WebSocket support)
 

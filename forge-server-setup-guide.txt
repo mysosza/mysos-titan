@@ -44,7 +44,7 @@ Target Groups Created:
   - cortex.mysos.co.za -> arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-cortex/78e8b51d024a0894
   - apex.mysos.co.za -> arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-apex/78c1f12c385440f9
   - console.mysos.co.za -> arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-console/e7252ef32f7757d8
-  - app.mysos.co.za -> arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-app/36d8c46ca45f95d9
+  - mobile.mysos.co.za -> arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-app/36d8c46ca45f95d9
   - web.mysos.co.za -> arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-web/8f182d5f099a96ca
   - sockets.mysos.co.za -> arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-sockets/97d35d01e7e18915
 
@@ -98,7 +98,7 @@ SITE 2: apex.mysos.co.za
 SITE 3: console.mysos.co.za
   - (same settings as above)
 
-SITE 4: app.mysos.co.za
+SITE 4: mobile.mysos.co.za
   - (same settings as above)
 
 SITE 5: web.mysos.co.za

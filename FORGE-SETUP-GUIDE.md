@@ -41,7 +41,7 @@ You need to create the following sites in Forge:
 1. **cerebrum.mysos.co.za** - Main Laravel API (formerly cortex)
 2. **neo.mysos.co.za** - API services (formerly apex)
 3. **portal.mysos.co.za** - Admin console (formerly console)
-4. **app.mysos.co.za** - Mobile app backend
+4. **mobile.mysos.co.za** - Mobile app backend
 5. **web.mysos.co.za** - Web application
 6. **sockets.mysos.co.za** - WebSocket server
 
@@ -466,7 +466,7 @@ After creating all sites, verify:
 - [ ] cerebrum.mysos.co.za - Deployed and running
 - [ ] neo.mysos.co.za - Deployed and running
 - [ ] portal.mysos.co.za - Deployed and running
-- [ ] app.mysos.co.za - Deployed and running
+- [ ] mobile.mysos.co.za - Deployed and running
 - [ ] web.mysos.co.za - Deployed and running
 - [ ] sockets.mysos.co.za - Deployed and running (with WebSocket support)
 
@@ -603,7 +603,7 @@ Point all Laravel domains to the ALB:
 cerebrum.mysos.co.za   -> CNAME -> mysos-titan-alb-358805960.af-south-1.elb.amazonaws.com
 neo.mysos.co.za        -> CNAME -> mysos-titan-alb-358805960.af-south-1.elb.amazonaws.com
 portal.mysos.co.za     -> CNAME -> mysos-titan-alb-358805960.af-south-1.elb.amazonaws.com
-app.mysos.co.za        -> CNAME -> mysos-titan-alb-358805960.af-south-1.elb.amazonaws.com
+mobile.mysos.co.za        -> CNAME -> mysos-titan-alb-358805960.af-south-1.elb.amazonaws.com
 web.mysos.co.za        -> CNAME -> mysos-titan-alb-358805960.af-south-1.elb.amazonaws.com
 sockets.mysos.co.za    -> CNAME -> mysos-titan-alb-358805960.af-south-1.elb.amazonaws.com
 ```

@@ -259,7 +259,7 @@ We need to create 6 sites in Forge:
 Create sites for:
 - **apex.mysos.co.za** (User Portal)
 - **console.mysos.co.za** (Admin Console)
-- **app.mysos.co.za** (Mobile Backend)
+- **mobile.mysos.co.za** (Mobile Backend)
 - **web.mysos.co.za** (Marketing Info)
 - **sockets.mysos.co.za** (WebSockets) - Special config below
 

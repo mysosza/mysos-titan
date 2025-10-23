@@ -27,7 +27,7 @@ For each domain below, click "New Site":
 1. cortex.mysos.co.za
 2. apex.mysos.co.za  
 3. console.mysos.co.za
-4. app.mysos.co.za
+4. mobile.mysos.co.za
 5. web.mysos.co.za
 6. sockets.mysos.co.za (enable WebSockets)
 

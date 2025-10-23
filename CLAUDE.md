@@ -82,7 +82,7 @@ The Laravel application domains were renamed for better clarity:
 
 **Old → New:**
 - cortex.mysos.co.za → **cerebrum.mysos.co.za**
-- apex.mysos.co.za → **neo.mysos.co.za**
+- neo.mysos.co.za → **neo.mysos.co.za**
 - console.mysos.co.za → **portal.mysos.co.za**
 
 **Infrastructure Changes Made:**

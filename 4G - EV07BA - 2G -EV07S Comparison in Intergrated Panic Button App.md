@@ -98,7 +98,7 @@
 
   private function panicbuttonCommand_send($pbId, $pbIMEI, $pbCommandType, $pbCommand) {
     // Determine which panic button server instance to use
-    $cmdURL = 'https://apex.mysos.co.za/api/pb/command';
+    $cmdURL = 'https://neo.mysos.co.za/api/pb/command';
 
     // Send HTTP POST to panic button server API
     $cmdPost = 'id=' . $pbId .

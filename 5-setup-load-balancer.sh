@@ -31,7 +31,7 @@ echo "✅ ALB Created: $ALB_DNS"
 declare -A APPS
 APPS=(
   ["cortex"]="cortex.mysos.co.za"
-  ["apex"]="apex.mysos.co.za"
+  ["apex"]="neo.mysos.co.za"
   ["console"]="console.mysos.co.za"
   ["mobile"]="mobile.mysos.co.za"
   ["web"]="web.mysos.co.za"

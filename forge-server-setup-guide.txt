@@ -42,7 +42,7 @@ Load Balancer:
 ALB DNS: mysos-titan-alb-358805960.af-south-1.elb.amazonaws.com
 Target Groups Created:
   - cortex.mysos.co.za -> arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-cortex/78e8b51d024a0894
-  - apex.mysos.co.za -> arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-apex/78c1f12c385440f9
+  - neo.mysos.co.za -> arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-apex/78c1f12c385440f9
   - console.mysos.co.za -> arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-console/e7252ef32f7757d8
   - mobile.mysos.co.za -> arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-app/36d8c46ca45f95d9
   - web.mysos.co.za -> arn:aws:elasticloadbalancing:af-south-1:877582899699:targetgroup/mysos-titan-web/8f182d5f099a96ca
@@ -92,7 +92,7 @@ SITE 1: cortex.mysos.co.za
   - Project Type: General PHP/Laravel
   - Web Directory: /public
 
-SITE 2: apex.mysos.co.za
+SITE 2: neo.mysos.co.za
   - (same settings as above)
 
 SITE 3: console.mysos.co.za

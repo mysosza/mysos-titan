@@ -257,7 +257,7 @@ We need to create 6 sites in Forge:
 ### 5.2: Repeat for Other Sites
 
 Create sites for:
-- **apex.mysos.co.za** (User Portal)
+- **neo.mysos.co.za** (User Portal)
 - **console.mysos.co.za** (Admin Console)
 - **mobile.mysos.co.za** (Mobile Backend)
 - **web.mysos.co.za** (Marketing Info)
